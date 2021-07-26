@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`postcss-plugin-maple-theme test cases a 1`] = `
+"a{
+          color: #eee;
+      }
+          html[data-theme=\\"dark\\"] a{
+          color: #111;
+}"
+`;
