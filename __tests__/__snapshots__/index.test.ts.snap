@@ -1,10 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`postcss-plugin-maple-theme test cases a 1`] = `
+exports[`postcss-plugin-maple-theme test cases non function color property should not be transformed 1`] = `
+"a{
+          color: #FFF;
+      }"
+`;
+
+exports[`postcss-plugin-maple-theme test cases should function color property be resolved right 1`] = `
 "a{
           color: #eee;
+          @nest html[data-theme=\\"dark\\"] &{
+          color: #111
+          }
+      }"
+`;
+
+exports[`postcss-plugin-maple-theme test cases useCustomProperties color property should be resolved right 1`] = `
+"a{
+          color: var(--C01);
       }
           html[data-theme=\\"dark\\"] a{
-          color: #111;
-}"
+          color: var(--C02);
+}
+      "
 `;

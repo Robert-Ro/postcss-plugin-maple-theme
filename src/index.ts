@@ -1,4 +1,4 @@
-import postcss, { AtRule, Declaration, Helpers, Plugin, PluginCreator, Rule } from 'postcss'
+import postcss, { AtRule, CssSyntaxError, Declaration, Helpers, Plugin, PluginCreator, Rule } from 'postcss'
 import Processor from 'postcss/lib/processor'
 
 export interface Options {
@@ -14,8 +14,12 @@ export interface Options {
   nestingPlugin?: string
 }
 export type Theme = 'dark' | 'light'
-
-const resolveColor = (options: Options, theme: Theme, group: string, defaultValue: string) => {
+export const getGroup = (value: string, reGroup: RegExp): string => {
+  return value.replace(reGroup, (match, group) => {
+    return group
+  })
+}
+export const resolveColor = (options: Options, theme: Theme, group: string, defaultValue: string): string => {
   const [lightColor, darkColor] = options.groups[group] || []
   const color: string = theme === 'dark' ? darkColor : lightColor
   if (!color) {
@@ -46,6 +50,7 @@ const plugincssMapleTheme: PluginCreator<Options> = (_options?: Options): Plugin
       return resolveColor(options, theme, group, match)
     })
   }
+
   return {
     postcssPlugin: 'postcss-theme-colors',
     Declaration: {
@@ -56,6 +61,10 @@ const plugincssMapleTheme: PluginCreator<Options> = (_options?: Options): Plugin
         }
         const lightValue = getValue(value, 'light')
         const darkValue = getValue(value, 'dark')
+        if (value === darkValue && value === lightValue) {
+          const group = getGroup(value, reGroup)
+          throw decl.error(`group ${group} has no colors configuration`)
+        }
         const darkDecl = decl.clone({ value: darkValue })
         let darkRule: AtRule | Rule
         if (hasPlugin('postcss-nesting', result.processor)) {
@@ -68,11 +77,11 @@ const plugincssMapleTheme: PluginCreator<Options> = (_options?: Options): Plugin
             selector: `${options.darkThemeSelector} &`,
           })
         } else {
-          result.warn(`Plugin(postcss-nesting or postcss-nested) not found`)
           throw decl.error(`Plugin(postcss-nesting or postcss-nested) not found`)
         }
         if (darkRule) {
           darkRule.append(darkDecl)
+          //Insert new node after current node to current node’s parent.
           decl.after(darkRule)
         }
         const ligthDecl = decl.clone({ value: lightValue })
