@@ -1,25 +1,13 @@
-import postcss, { AtRule, CssSyntaxError, Declaration, Helpers, Plugin, PluginCreator, Rule } from 'postcss'
+import postcss, { AtRule, Declaration, Helpers, Plugin, PluginCreator, Rule } from 'postcss'
 import Processor from 'postcss/lib/processor'
+import { Options, Theme } from './types'
 
-export interface Options {
-  function?: string
-  darkThemeSelector?: string
-  groups: {
-    [key: string]: string[]
-  }
-  colors: {
-    [key: string]: string
-  }
-  useCustomProperties?: boolean
-  nestingPlugin?: string
-}
-export type Theme = 'dark' | 'light'
-export const getGroup = (value: string, reGroup: RegExp): string => {
+const getGroup = (value: string, reGroup: RegExp): string => {
   return value.replace(reGroup, (match, group) => {
     return group
   })
 }
-export const resolveColor = (options: Options, theme: Theme, group: string, defaultValue: string): string => {
+const resolveColor = (options: Options, theme: Theme, group: string, defaultValue: string): string => {
   const [lightColor, darkColor] = options.groups[group] || []
   const color: string = theme === 'dark' ? darkColor : lightColor
   if (!color) {
