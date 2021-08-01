@@ -63,7 +63,7 @@ module.exports = {
 }
 ```
 
-see more [options](https://github.com/Robert-Ro/postcss-plugin-maple-theme.git/src/types.d.ts)
+see more [options](./src/types.d.ts)
 
 ## example
 ```
