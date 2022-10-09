@@ -36,6 +36,7 @@ or
 ```sh
 yarn add postcss @liutsing/postcss-theme-colors --save-dev
 ```
+
 or
 
 ```sh
@@ -71,6 +72,7 @@ module.exports = {
 see more [options](./src/types/index.d.ts)
 
 ## example
+
 ```
 cd example
 yarn
