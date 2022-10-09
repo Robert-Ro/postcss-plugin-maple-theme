@@ -1,7 +1,7 @@
 import postcss, { CssSyntaxError } from 'postcss'
 import plugin from '../src'
 import postcssNested from 'postcss-nested'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+//@typescript-eslint-disabled @typescript-eslint/no-var-require
 const postcssNesting = require('postcss-nesting')
 
 describe('postcss-plugin-maple-theme test cases', () => {

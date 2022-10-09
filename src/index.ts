@@ -1,6 +1,18 @@
 import postcss, { AtRule, Declaration, Helpers, Plugin, PluginCreator, Rule } from 'postcss'
 import Processor from 'postcss/lib/processor'
-import { Options, Theme } from './types'
+interface Options {
+  function?: string
+  darkThemeSelector?: string
+  groups: {
+    [key: string]: string[]
+  }
+  colors: {
+    [key: string]: string
+  }
+  useCustomProperties?: boolean
+  nestingPlugin?: string
+}
+type Theme = 'dark' | 'light'
 
 const getGroup = (value: string, reGroup: RegExp): string => {
   return value.replace(reGroup, (match, group) => {
