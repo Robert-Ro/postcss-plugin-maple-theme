@@ -52,7 +52,7 @@ const plugincssMapleTheme: PluginCreator<Options> = (_options?: Options): Plugin
   }
 
   return {
-    postcssPlugin: 'postcss-theme-colors',
+    postcssPlugin: '@liutsing/postcss-theme-colors',
     Declaration: {
       color: (decl: Declaration, { result }: Helpers) => {
         const value = decl.value
@@ -81,7 +81,7 @@ const plugincssMapleTheme: PluginCreator<Options> = (_options?: Options): Plugin
         }
         if (darkRule) {
           darkRule.append(darkDecl)
-          //Insert new node after current node to current node’s parent.
+          // Insert new node after current node to current node’s parent.
           decl.after(darkRule)
         }
         const ligthDecl = decl.clone({ value: lightValue })

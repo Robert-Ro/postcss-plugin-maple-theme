@@ -28,13 +28,18 @@ html[data-theme='dark'] a {
 **Step 1:** Install plugin:
 
 ```sh
-npm install --save-dev postcss postcss-theme-colors
+npm install --save-dev postcss @liutsing/postcss-theme-colors
 ```
 
 or
 
 ```sh
-yarn add postcss postcss-theme-colors --save-dev
+yarn add postcss @liutsing/postcss-theme-colors --save-dev
+```
+or
+
+```sh
+pnpm install --save-dev postcss @liutsing/postcss-theme-colors
 ```
 
 **Step 2:** Check your project for existing PostCSS config: `postcss.config.js`
@@ -49,7 +54,7 @@ and set this plugin in settings.
 ```diff
 module.exports = {
   plugins: [
-+   require('postcss-theme-colors')({
++   require('@liutsing/postcss-theme-colors')({
 +      groups: {
 +       G01: ['C01', 'C02'],
 +     },
@@ -63,7 +68,7 @@ module.exports = {
 }
 ```
 
-see more [options](./src/types.d.ts)
+see more [options](./src/types/index.d.ts)
 
 ## example
 ```

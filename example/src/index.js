@@ -2,7 +2,7 @@
 import './index.less'
 import './index.css'
 // eslint-disable-next-line no-console
-console.log('postcss-theme-colors')
+console.log('@liutsing/postcss-theme-colors')
 const span = document.createElement('span')
 span.textContent = 'This is a span tag'
 const a = document.createElement('a')

@@ -1,5 +1,5 @@
 {
-  "name": "postcss-theme-colors-example",
+  "name": "@liutsing/postcss-theme-colors-example",
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
